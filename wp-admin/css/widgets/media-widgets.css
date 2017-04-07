@@ -49,3 +49,7 @@
 .media-widget-control .media-widget-preview img {
 	max-width: 100%;
 }
+
+.media-widget-video-preview {
+	width: 100%;
+}
