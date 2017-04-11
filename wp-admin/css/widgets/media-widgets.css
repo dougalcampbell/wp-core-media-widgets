@@ -1,6 +1,11 @@
+.media-widget-control.selected .placeholder,
 .media-widget-control.selected .not-selected,
-.media-widget-control:not(.selected) .selected {
+.media-widget-control .selected {
 	display: none;
+}
+
+.media-widget-control.selected .selected {
+	display: inline-block;
 }
 
 .media-widget-buttons {
@@ -52,4 +57,9 @@
 
 .media-widget-video-preview {
 	width: 100%;
+}
+
+.media-frame.media-widget .image-details .embed-media-settings .setting.align,
+.media-frame.media-widget .attachment-display-settings .setting.align {
+	display: none;
 }

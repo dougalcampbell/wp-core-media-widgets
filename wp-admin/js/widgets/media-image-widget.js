@@ -31,9 +31,12 @@
 		 */
 		renderPreview: function renderPreview() {
 			var control = this, previewContainer, previewTemplate;
-			previewContainer = control.$el.find( '.media-widget-preview .rendered' );
+			previewContainer = control.$el.find( '.media-widget-preview' );
 			previewTemplate = wp.template( 'wp-media-widget-image-preview' );
-			previewContainer.html( previewTemplate( { attachment: control.selectedAttachment.attributes } ) );
+			previewContainer.html( previewTemplate( _.extend(
+				control.model.toJSON(),
+				{ attachment: control.selectedAttachment.toJSON() }
+			) ) );
 		},
 
 		/**
@@ -71,7 +74,6 @@
 			if ( ! _.isEmpty( attachment ) ) {
 				_.extend( props, {
 					attachment_id: attachment.id,
-					align: displaySettings.align,
 					alt: attachment.alt,
 					caption: attachment.caption,
 					image_classes: '',
@@ -104,7 +106,6 @@
 			if ( ! _.isEmpty( attachment ) ) {
 				_.extend( props, {
 					attachment_id: 0,
-					align: attachment.align,
 					alt: attachment.alt,
 					caption: attachment.caption,
 					image_classes: '',
@@ -135,7 +136,6 @@
 			metadata = {
 				attachment_id: control.model.get( 'attachment_id' ),
 				alt: control.model.get( 'alt' ),
-				align: control.model.get( 'align' ),
 				caption: control.model.get( 'caption' ),
 				customWidth: control.model.get( 'width' ),
 				customHeight: control.model.get( 'height' ),
@@ -156,6 +156,7 @@
 				state: 'image-details',
 				metadata: metadata
 			} );
+			mediaFrame.$el.addClass( 'media-widget' );
 
 			updateCallback = function( imageData ) {
 				var attachment;
@@ -168,7 +169,6 @@
 				control.model.set( {
 					attachment_id: imageData.attachment_id,
 					alt: imageData.alt,
-					align: imageData.align,
 					caption: imageData.caption,
 					image_classes: imageData.extraClasses,
 					image_title: imageData.title,
